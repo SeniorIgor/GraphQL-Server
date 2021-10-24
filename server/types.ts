@@ -1,3 +1,3 @@
-export type Context {
-  dataBase: string
-}
+export type Context = {
+  message: string;
+};
