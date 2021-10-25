@@ -1,9 +1,13 @@
+import { UserResolver } from './resolvers/user';
+// https://github.com/MichalLytek/type-graphql/tree/v1.0.0/examples/typegoose
+
 import 'reflect-metadata';
-import { HelloResolver, PostResolver } from './resolvers';
 import express, { Request, Response, NextFunction } from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import mongoose from 'mongoose';
+
+import { PostResolver, UserResolver } from './resolvers';
 import { Context } from './types';
 
 let apolloServer = null;
@@ -19,7 +23,7 @@ async function startServer() {
   try {
     apolloServer = new ApolloServer({
       schema: await buildSchema({
-        resolvers: [HelloResolver, PostResolver],
+        resolvers: [PostResolver, UserResolver],
         validate: false,
       }),
       context: (): Context => ({ message: 'Connected' }),
